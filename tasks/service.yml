@@ -1,0 +1,20 @@
+---
+- name: Create chisel configuration file
+  template:
+    src: "{{ chisel_config_template }}"
+    dest: "{{ chisel_config_destination }}"
+    mode: 0644
+
+- name: Create service file
+  template:
+    src: "{{ chisel_service_template }}"
+    dest: "{{ chisel_service_destination }}"
+    mode: 0644
+  notify:
+    - reload
+
+- name: Start service
+  service:
+    name: "{{ chisel_service_name }}"
+    state: started
+    enabled: yes

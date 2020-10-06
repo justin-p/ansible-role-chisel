@@ -1,0 +1,14 @@
+---
+- name: Updating and upgrading packages
+  apt:
+    upgrade: yes
+    update_cache: yes
+
+- name: Create chisel directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+  with_items:
+    - /var/log/chisel/
+    - "{{ chisel_config_folder }}"

@@ -1,0 +1,23 @@
+---
+- name: "Check if chisel is installed at {{ chisel_install_destination }}"
+  stat:
+    path: "{{ chisel_install_destination }}"
+  register: chisel
+
+- name: "Download chisel {{ chisel_version }}"
+  get_url:
+    url: "{{ chisel_download_url_linux_amd64 }}"
+    dest: "{{ chisel_download_destination }}"
+    checksum: "sha256:{{ chisel_linux_amd64_sha256 }}"
+  when: not chisel.stat.exists
+
+- name: "Unpack chisel to {{ chisel_install_destination }}"
+  shell: "gunzip -c {{ chisel_download_destination }} > {{ chisel_install_destination }}"
+  when: not chisel.stat.exists
+
+- name: "Set correct rights for {{ chisel_install_destination }}"
+  file:
+    path: "{{ chisel_install_destination }}"
+    owner: root
+    group: root
+    mode: 0775

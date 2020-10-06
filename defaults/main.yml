@@ -1,0 +1,41 @@
+---
+chisel_version: 1.7.1
+chisel_download_url_linux_amd64: https://github.com/jpillora/chisel/releases/download/v{{ chisel_version }}/chisel_{{ chisel_version }}_linux_amd64.gz
+chisel_linux_amd64_sha256: 6e1611b4524f7426cbd8d7351b269a1239ee710e575e9e460fce110c35962de6
+chisel_download_destination: /tmp/chisel_{{ chisel_version }}.gz
+chisel_install_destination: /usr/local/bin/chisel
+
+chisel_service_name: chisel-client
+chisel_service_destination: "/lib/systemd/system/{{ chisel_service_name }}.service"
+chisel_service_template: "{{ chisel_service_name }}.service.j2"
+
+chisel_config_name: chisel-client
+chisel_config_folder: /etc/chisel/
+chisel_config_template: "{{ chisel_config_name }}.conf.j2"
+chisel_config_destination: "{{ chisel_config_folder }}{{ chisel_config_name }}.conf"
+
+chisel_client_server_url: http://127.0.0.1
+chisel_client_remotes: "8080"
+chisel_client_server_fingerprint: aa:bb:cc:dd:ee:ff:gg
+chisel_client_auth_username: user
+chisel_client_auth_password: pass
+chisel_client_keepalive: 25s
+chisel_client_max_retry_count: unlimited
+chisel_client_max_retry_interval: 5
+chisel_client_proxy: http://admin:password@my-server.com:8081
+chisel_client_headers: '--header "Foo: Bar" --header "Hello: World"'
+chisel_client_hostname: example.com
+chisel_client_tls_ca: /path/to/bundle
+chisel_client_tls_key: /path/to/PEM
+chisel_client_tls_cert:  /path/to/PEM
+
+chisel_server_host: 0.0.0.0
+chisel_server_port: 80
+chisel_server_key: a_random_string
+chisel_server_auth_file: /path/to/user.json
+chisel_server_auth: user:pass
+chisel_server_keepalive: 25s
+chisel_server_backend: http://127.0.0.1:8081
+chisel_server_tls_ca: --tls-ca /path/to/cert
+chisel_server_tls_key: --tls-key  /path/to/cert
+chisel_server_tls_cert: --tls-cert /path/to/cert
