@@ -1,6 +1,16 @@
 # ansible-chisel
 
-## client with example template
+A Ansible role to deploy a chisel client and/or server.
+
+## Variables
+
+| to  | do  |
+| --- | --- |
+|     |     |
+
+## Examples
+
+### Client with example template
 
 ```
 ---
@@ -10,7 +20,7 @@
     - role: justin_p.chisel
 ```
 
-## server with example template
+### Server with example template
 
 ```
 ---
@@ -22,3 +32,7 @@
           chisel_service_name: chisel-server
           chisel_config_name: chisel-server
 ```
+
+## Contributing
+
+Feel free to open issues, contribute and submit your Pull Requests. You can also ping me on Twitter ([@JustinPerdok](https://twitter.com/JustinPerdok))
