@@ -1,6 +1,6 @@
 # ansible-chisel
 
-A Ansible role to deploy a chisel client and/or server as a systemd service.
+A Ansible role to deploy a [chisel](https://github.com/jpillora/chisel) client and/or server as a systemd service.
 
 ## Variables
 
