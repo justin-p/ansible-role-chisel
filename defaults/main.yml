@@ -36,6 +36,6 @@ chisel_server_auth_file: /path/to/user.json
 chisel_server_auth: user:pass
 chisel_server_keepalive: 25s
 chisel_server_backend: http://127.0.0.1:8081
-chisel_server_tls_ca: --tls-ca /path/to/cert
-chisel_server_tls_key: --tls-key  /path/to/cert
-chisel_server_tls_cert: --tls-cert /path/to/cert
+chisel_server_tls_ca: --tls-ca /path/to/PEM
+chisel_server_tls_key: --tls-key /path/to/PEM
+chisel_server_tls_cert: --tls-cert /path/to/PEM
