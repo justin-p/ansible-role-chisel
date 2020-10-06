@@ -20,12 +20,12 @@
       changed_when: False
       register: chisel_log
 
-    - name: Check if the chisel client connected to the chisel server
+    - name: Verify if the chisel client connected to the chisel server
       command: echo dummy_echo_to_verify_service
       changed_when: False
       failed_when: '"client: tun: SSH connected" not in chisel_log.stdout'
 
-    - name: Check if the chisel server received a connection form chisel client
+    - name: Verify if the chisel server received a connection from the chisel client
       command: echo dummy_echo_to_verify_service
       changed_when: False
       failed_when: '"server: session#1: tun: SSH connected" not in chisel_log.stdout'
