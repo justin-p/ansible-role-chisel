@@ -7,6 +7,7 @@ on:
     branches: [ main ]
   schedule:
     - cron: "0 16 * * *"
+  release:
 
 jobs:
   test:
@@ -36,3 +37,14 @@ jobs:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
           MOLECULE_DISTRO: ${{ matrix.distro }}
+  
+  release:
+    if: github.event_name == release
+    needs:
+      - test
+    runs-on: ubuntu-latest
+    steps:
+      - name: galaxy
+        uses: robertdebock/galaxy-action@1.0.3
+        with:
+          galaxy_api_key: ${{ secrets.galaxy_api_key }}        
