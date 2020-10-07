@@ -8,7 +8,7 @@
   apt:
     name: gzip
     state: present
-    
+
 - name: Create chisel directories
   file:
     path: "{{ item }}"
