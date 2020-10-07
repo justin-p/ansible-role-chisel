@@ -4,6 +4,11 @@
     upgrade: yes
     update_cache: yes
 
+- name: Ensure gzip is installed
+  apt:
+    name: gzip
+    state: present
+    
 - name: Create chisel directories
   file:
     path: "{{ item }}"
