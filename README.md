@@ -1,7 +1,6 @@
 # ansible-role-chisel
 
 ![Github Actions](https://img.shields.io/github/workflow/status/justin-p/ansible-role-chisel/CI?label=Github%20Actions&logo=github&style=flat-square)
-![Travis](https://img.shields.io/travis/justin-p/ansible-role-chisel?label=Travis&logo=travis&style=flat-square)
 
 A Ansible role to deploy a [chisel](https://github.com/jpillora/chisel) client and/or server as a systemd service.
 
