@@ -3,8 +3,24 @@ name: CI
 on:
   push:
     branches: [ main ]
+    paths-ignore: 
+      - '.github/**'
+      - 'README.md'
+      - 'LICENSE'
+      - '.gitignore'
+      - '.editorconfig'
+      - '.ansible-lint'
+      - '.yamllint'
   pull_request:
     branches: [ main ]
+    paths-ignore: 
+      - '.github/**'
+      - 'README.md'
+      - 'LICENSE'
+      - '.gitignore'
+      - '.editorconfig'
+      - '.ansible-lint'
+      - '.yamllint'    
   schedule:
     - cron: "0 16 * * *"
   release:
