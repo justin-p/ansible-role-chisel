@@ -2,7 +2,7 @@
 
 ![Github Actions](https://img.shields.io/github/workflow/status/justin-p/ansible-role-chisel/CI?label=Github%20Actions&logo=github&style=flat-square)
 
-A Ansible role to deploy a [chisel](https://github.com/jpillora/chisel) client and/or server as a systemd service.
+A Ansible role to deploy a [chisel](https://github.com/jpillora/chisel) client and/or server as a systemd service. The main idea is to use this to easly automate a dropbox scenario that ensures the client always callsback regardless of network issues/reboots.
 
 ## Requirements
 
