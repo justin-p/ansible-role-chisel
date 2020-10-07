@@ -39,7 +39,7 @@ jobs:
           MOLECULE_DISTRO: ${{ matrix.distro }}
   
   release:
-    if: github.event_name == release
+    if: github.event_name == 'release'
     needs:
       - test
     runs-on: ubuntu-latest
