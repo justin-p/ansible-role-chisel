@@ -11,7 +11,7 @@ on:
 
 jobs:
   test:
-    name: Molecule
+    name: Run molecule tests.
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -39,6 +39,7 @@ jobs:
           MOLECULE_DISTRO: ${{ matrix.distro }}
   
   release:
+    name: Push release to Ansible Galaxy.
     if: github.event_name == 'release'
     needs:
       - test
