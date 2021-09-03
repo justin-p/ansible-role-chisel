@@ -1,7 +1,7 @@
 ---
 chisel_version: 1.7.6
 chisel_download_url_linux_amd64: https://github.com/jpillora/chisel/releases/download/v{{ chisel_version }}/chisel_{{ chisel_version }}_linux_amd64.gz
-chisel_linux_amd64_sha256: 6e1611b4524f7426cbd8d7351b269a1239ee710e575e9e460fce110c35962de6
+chisel_linux_amd64_sha256: b08782b58eb043e7cd649302ceea993582f55762d7b384c418253d227930fe32
 chisel_download_destination: /tmp/chisel_{{ chisel_version }}.gz
 chisel_install_destination: /usr/local/bin/chisel
 
