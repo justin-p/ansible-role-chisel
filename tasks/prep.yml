@@ -1,16 +1,16 @@
 ---
 - name: Updating and upgrading packages
-  apt:
+  ansible.builtin.apt:
     upgrade: yes
     update_cache: yes
 
 - name: Ensure gzip is installed
-  apt:
+  ansible.builtin.apt:
     name: gzip
     state: present
 
 - name: Create chisel directories
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     mode: 0755
