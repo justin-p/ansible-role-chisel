@@ -11,7 +11,7 @@
     dest: "{{ chisel_service_destination }}"
     mode: 0644
   notify:
-    - reload
+    - Reload
 
 - name: Start service
   ansible.builtin.service:
