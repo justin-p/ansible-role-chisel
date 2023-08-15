@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches: [ main ]
-    paths-ignore: 
+    paths-ignore:
       - '.github/**'
       - 'meta/**'
       - 'README.md'
@@ -15,7 +15,7 @@ on:
       - '.yamllint'
   pull_request:
     branches: [ main ]
-    paths-ignore: 
+    paths-ignore:
       - '.github/**'
       - 'meta/**'
       - 'README.md'
@@ -23,7 +23,7 @@ on:
       - '.gitignore'
       - '.editorconfig'
       - '.ansible-lint'
-      - '.yamllint'    
+      - '.yamllint'
   schedule:
     - cron: "0 16 * * *"
   release:
@@ -57,7 +57,7 @@ jobs:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
           MOLECULE_DISTRO: ${{ matrix.distro }}
-  
+
   release:
     name: Push release to Ansible Galaxy.
     if: github.event_name == 'release'
@@ -68,4 +68,4 @@ jobs:
       - name: galaxy
         uses: robertdebock/galaxy-action@1.0.3
         with:
-          galaxy_api_key: ${{ secrets.galaxy_api_key }}        
+          galaxy_api_key: ${{ secrets.galaxy_api_key }}

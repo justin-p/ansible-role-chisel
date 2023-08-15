@@ -4,16 +4,36 @@
     path: "{{ chisel_install_destination }}"
   register: chisel
 
+- name: "Check installed chisel version"
+  ansible.builtin.command: "{{ chisel_install_destination }} -v"
+  register: chisel_inst_ver
+  when: chisel.stat.exists
+  changed_when: chisel_inst_ver.stdout != chisel_version
+
+- name: Set chisel installed version
+  ansible.builtin.set_fact:
+    chisel_installed_version: '{{ chisel_inst_ver.stdout | default("") }}'
+  when: chisel.stat.exists
+
 - name: "Download chisel {{ chisel_version }}"
   ansible.builtin.get_url:
     url: "{{ chisel_download_url_linux_amd64 }}"
     dest: "{{ chisel_download_destination }}"
     checksum: "sha256:{{ chisel_linux_amd64_sha256 }}"
-  when: not chisel.stat.exists
+    mode: '0600'
+  notify:
+    - Stop chisel
+  when: not chisel.stat.exists or chisel_version != chisel_installed_version
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
+  when: chisel_version != chisel_installed_version
 
 - name: "Unpack chisel to {{ chisel_install_destination }}"
   ansible.builtin.shell: "gunzip -c {{ chisel_download_destination }} > {{ chisel_install_destination }}"
-  when: not chisel.stat.exists
+  register: gunzip_output
+  when: not chisel.stat.exists or chisel_version != chisel_installed_version
+  changed_when: gunzip_outout.rc != 0
 
 - name: "Set correct rights for {{ chisel_install_destination }}"
   ansible.builtin.file:
