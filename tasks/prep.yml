@@ -3,11 +3,24 @@
   ansible.builtin.apt:
     upgrade: yes
     update_cache: yes
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Ensure gzip is installed
   ansible.builtin.apt:
     name: gzip
     state: present
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Ensure gzip is installed
+  ansible.builtin.yum:
+    name: gzip
+    update_cache: true
+  when: ansible_os_family == "RedHat"
+
+- name: Ensure gzip is installed
+  community.general.zypper:
+    name: gzip
+  when: ansible_distribution == "openSUSE Leap"
 
 - name: Create chisel directories
   ansible.builtin.file:

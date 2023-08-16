@@ -3,7 +3,7 @@ name: CI
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: [ fix-ci ]
     paths-ignore:
       - '.github/**'
       - 'meta/**'
@@ -14,7 +14,7 @@ on:
       - '.ansible-lint'
       - '.yamllint'
   pull_request:
-    branches: [ main ]
+    branches: [ fix-ci ]
     paths-ignore:
       - '.github/**'
       - 'meta/**'
@@ -32,27 +32,32 @@ on:
 jobs:
   test:
     name: Run molecule tests.
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         distro:
+          - ubuntu2204
           - ubuntu2004
-          - ubuntu1804
+          - opensuseleap15
+          - fedora38
 
     steps:
       - name: Check out the codebase.
         uses: actions/checkout@v2
 
       - name: Set up Python 3.
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
       - name: Install test dependencies.
-        run: pip3 install ansible molecule docker molecule-docker yamllint ansible-lint
+        run: |
+          pip3 install ansible molecule molecule-plugins[docker] docker yamllint ansible-lint
+          ansible-galaxy collection install --force --requirements-file molecule/requirements.yml
 
       - name: Run Molecule tests.
-        run: molecule test
+        run: molecule -v --debug test
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
