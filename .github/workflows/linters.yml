@@ -1,0 +1,33 @@
+name: lint
+on:
+  push:
+    paths-ignore:
+      - '.github/**'
+      - 'meta/**'
+      - 'README.md'
+      - 'LICENSE'
+      - '.gitignore'
+      - '.editorconfig'
+  pull_request:
+    paths-ignore:
+      - '.github/**'
+      - 'meta/**'
+      - 'README.md'
+      - 'LICENSE'
+      - '.gitignore'
+      - '.editorconfig'
+jobs:
+  lint:
+    name: Linters
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v3
+
+      - name: Run yamllint.
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          config_file: .yamllint
+
+      - name: Run ansible-lint.
+        uses: pipeline-components/ansible-lint@master

@@ -3,7 +3,6 @@ name: CI
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
     paths-ignore:
       - '.github/**'
       - 'meta/**'
@@ -14,7 +13,6 @@ on:
       - '.ansible-lint'
       - '.yamllint'
   pull_request:
-    branches: [ main ]
     paths-ignore:
       - '.github/**'
       - 'meta/**'
@@ -32,24 +30,30 @@ on:
 jobs:
   test:
     name: Run molecule tests.
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         distro:
+          - ubuntu2204
           - ubuntu2004
-          - ubuntu1804
+          - rockylinux8
+          - rockylinux9
+          - fedora38
 
     steps:
       - name: Check out the codebase.
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Python 3.
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
       - name: Install test dependencies.
-        run: pip3 install ansible molecule docker molecule-docker yamllint ansible-lint
+        run: |
+          pip3 install ansible molecule molecule-plugins[docker] docker yamllint ansible-lint
+          ansible-galaxy collection install --force --requirements-file molecule/requirements.yml
 
       - name: Run Molecule tests.
         run: molecule test
@@ -66,6 +70,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: galaxy
-        uses: robertdebock/galaxy-action@1.0.3
+        uses: robertdebock/galaxy-action@1.2.1
         with:
           galaxy_api_key: ${{ secrets.galaxy_api_key }}

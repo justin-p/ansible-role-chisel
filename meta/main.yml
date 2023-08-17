@@ -10,8 +10,15 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
-        - bionic
-        - artful
+        - jammy
+        - focal
+    - name: Fedora
+      versions:
+        - all
+    - name: EL
+      versions:
+        - "8"
+        - "9"
 
   galaxy_tags: []
 

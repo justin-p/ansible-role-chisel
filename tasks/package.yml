@@ -10,10 +10,21 @@
   when: chisel.stat.exists
   changed_when: chisel_inst_ver.stdout != chisel_version
 
-- name: Set chisel installed version
+- name: "Set chisel installed version"
   ansible.builtin.set_fact:
     chisel_installed_version: '{{ chisel_inst_ver.stdout | default("") }}'
   when: chisel.stat.exists
+
+- name: "Stop chisel service if it needs to be downloaded"
+  ansible.builtin.systemd:
+    name: "{{ chisel_service_name }}"
+    state: stopped
+  register: stop_service
+  failed_when:
+    - stop_service.failed == true
+    - '"Could not find the requested service" not in stop_service.msg'
+  become: yes
+  when: not chisel.stat.exists or chisel_version != chisel_installed_version
 
 - name: "Download chisel {{ chisel_version }}"
   ansible.builtin.get_url:
@@ -21,19 +32,12 @@
     dest: "{{ chisel_download_destination }}"
     checksum: "sha256:{{ chisel_linux_amd64_sha256 }}"
     mode: '0600'
-  notify:
-    - Stop chisel
   when: not chisel.stat.exists or chisel_version != chisel_installed_version
 
-- name: Flush handlers
-  ansible.builtin.meta: flush_handlers
-  when: chisel_version != chisel_installed_version
-
-- name: "Unpack chisel to {{ chisel_install_destination }}"
+- name: "Unpack chisel to {{ chisel_install_destination }}"    # noqa: no-changed-when
   ansible.builtin.shell: "gunzip -c {{ chisel_download_destination }} > {{ chisel_install_destination }}"
   register: gunzip_output
   when: not chisel.stat.exists or chisel_version != chisel_installed_version
-  changed_when: gunzip_outout.rc != 0
 
 - name: "Set correct rights for {{ chisel_install_destination }}"
   ansible.builtin.file:

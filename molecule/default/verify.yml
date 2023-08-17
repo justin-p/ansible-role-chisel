@@ -2,26 +2,26 @@
   hosts: all
   tasks:
     - name: Gather service facts
-      service_facts:
+      ansible.builtin.service_facts:
       register: services_state
 
     - name: Verify if the client service is running
-      assert:
+      ansible.builtin.assert:
         that: services_state.ansible_facts.services["chisel-client.service"].state == "running"
 
     - name: Verify if the server service is running
-      assert:
+      ansible.builtin.assert:
         that: services_state.ansible_facts.services["chisel-server.service"].state == "running"
 
     - name: Get contents of var/log/chisel/chisel-*.log
-      shell: cat /var/log/chisel/chisel-*.log
+      ansible.builtin.shell: cat /var/log/chisel/chisel-*.log
       changed_when: False
       register: chisel_log
 
     - name: Verify if the chisel client connected to the chisel server
-      assert:
+      ansible.builtin.assert:
         that: '"client: tun: SSH connected" in chisel_log.stdout'
 
-    - name: Verify if the chisel server received a connection form chisel client
-      assert:
+    - name: Verify if the chisel server received a connection from chisel client
+      ansible.builtin.assert:
         that: '"server: session#1: tun: SSH connected" in chisel_log.stdout'

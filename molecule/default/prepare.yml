@@ -3,22 +3,30 @@
   hosts: all
   pre_tasks:
     - name: Create .ssh folder in the users home folder (for github actions).
-      file:
+      ansible.builtin.file:
         path: "~/.ssh/"
         mode: '0700'
         state: directory
       delegate_to: localhost
 
     - name: Ensure needed ssh keypair is created.
-      openssh_keypair:
+      community.crypto.openssh_keypair:
         path: "~/.ssh/id_rsa"
       delegate_to: localhost
 
     - name: Update apt cache.
-      apt:
+      ansible.builtin.apt:
         update_cache: true
         cache_valid_time: 3600
+      when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
     - name: Install OpenSSH.
-      apt:
+      ansible.builtin.apt:
         name: openssh-server
+      when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+    - name: Install OpenSSH.
+      ansible.builtin.yum:
+        name: openssh-server
+        update_cache: true
+      when: ansible_os_family == "RedHat"
