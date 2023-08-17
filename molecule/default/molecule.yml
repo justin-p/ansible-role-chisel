@@ -8,7 +8,7 @@ driver:
   name: docker
 platforms:
   - name: instance
-    image: geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu2004}-ansible:latest
+    image: geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu2204}-ansible:latest
     command: ""
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
@@ -25,18 +25,5 @@ provisioner:
     host_vars:
       instance:
         ansible_user: root
-scenario:
-  name: default
-  test_sequence:
-    - destroy
-    - dependency
-    - syntax
-    - create
-    - prepare
-    - converge
-    - idempotence
-    - side_effect
-    - verify
-    - destroy
 verifier:
   name: ansible

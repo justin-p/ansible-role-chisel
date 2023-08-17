@@ -2,10 +2,3 @@
   ansible.builtin.systemd:
     daemon_reload: yes
   become: yes
-
-- name: Stop chisel
-  ansible.builtin.systemd:
-    name: "{{ chisel_service_name }}"
-    state: stopped
-    daemon_reload: yes
-  become: yes

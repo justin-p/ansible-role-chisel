@@ -17,11 +17,6 @@
     update_cache: true
   when: ansible_os_family == "RedHat"
 
-- name: Ensure gzip is installed
-  community.general.zypper:
-    name: gzip
-  when: ansible_distribution == "openSUSE Leap"
-
 - name: Create chisel directories
   ansible.builtin.file:
     path: "{{ item }}"

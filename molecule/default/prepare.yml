@@ -30,9 +30,3 @@
         name: openssh-server
         update_cache: true
       when: ansible_os_family == "RedHat"
-
-    - name: Install OpenSSH.
-      community.general.zypper:
-        name: openssh
-        update_cache: true
-      when: ansible_distribution == "openSUSE Leap"
