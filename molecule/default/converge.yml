@@ -1,14 +1,14 @@
 ---
-- name: Converge
+- name: "Converge"
   hosts: all
   tasks:
-    - name: Deploy chisel server.
+    - name: "Deploy chisel server."
       vars:
-        chisel_service_name: chisel-server
-        chisel_config_name: chisel-server
-      include_role:
+        chisel_service_name: chisel-server   # noqa: var-naming[no-role-prefix]
+        chisel_config_name: chisel-server    # noqa: var-naming[no-role-prefix]
+      ansible.builtin.include_role:
         name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
 
-    - name: Deploy chisel client.
-      include_role:
+    - name: "Deploy chisel client."
+      ansible.builtin.include_role:
         name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"

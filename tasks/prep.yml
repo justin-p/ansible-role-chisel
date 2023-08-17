@@ -1,23 +1,23 @@
 ---
-- name: Updating and upgrading packages
+- name: "Updating and upgrading packages"
   ansible.builtin.apt:
     upgrade: yes
     update_cache: yes
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
-- name: Ensure gzip is installed
+- name: "Ensure gzip is installed"
   ansible.builtin.apt:
     name: gzip
     state: present
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
-- name: Ensure gzip is installed
+- name: "Ensure gzip is installed"
   ansible.builtin.yum:
     name: gzip
     update_cache: true
   when: ansible_os_family == "RedHat"
 
-- name: Create chisel directories
+- name: "Create chisel directories"
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
