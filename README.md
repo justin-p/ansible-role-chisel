@@ -1,9 +1,8 @@
 # ansible-role-chisel
 
-[![Ansible Role Name](https://img.shields.io/ansible/role/51177?label=Role%20Name&logo=ansible&style=flat-square)](https://galaxy.ansible.com/justin_p/chisel)
-[![Ansible Quality Score](https://img.shields.io/ansible/quality/51177?label=Ansible%20Quality%20Score&logo=ansible&style=flat-square)](https://galaxy.ansible.com/justin_p/chisel)
-[![Ansible Role Downloads](https://img.shields.io/ansible/role/d/51177?label=Ansible%20Role%20Downloads&logo=ansible&style=flat-square)](https://galaxy.ansible.com/justin_p/chisel)
-[![Github Actions](https://img.shields.io/github/workflow/status/justin-p/ansible-role-chisel/CI?label=Github%20Actions&logo=github&style=flat-square)](https://github.com/justin-p/ansible-role-chisel/actions)
+[![Ansible Role Name](https://img.shields.io/ansible/role/d/justin_p/chisel?style=flat-square
+)](https://galaxy.ansible.com/justin_p/chisel)
+[![Github Actions](https://img.shields.io/github/actions/workflow/status/justin-p/ansible-role-chisel/main.yml?label=Github%20Actions&logo=github&style=flat-square)](https://github.com/justin-p/ansible-role-chisel/actions)
 
 A Ansible role to deploy a [chisel](https://github.com/jpillora/chisel) client and/or server as a systemd service. The main idea is to use this to easily automate a dropbox scenario that ensures the client always callsback regardless of network issues, reboots or program crashes, while also taking advantage of what chisel can offer over a SSH or VPN based solution.
 
