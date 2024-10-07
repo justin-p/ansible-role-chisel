@@ -39,3 +39,4 @@ chisel_server_backend: http://127.0.0.1:8081
 chisel_server_tls_ca: /path/to/PEM
 chisel_server_tls_key: /path/to/PEM
 chisel_server_tls_cert: /path/to/PEM
+chisel_server_reverse: true
