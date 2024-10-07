@@ -12,7 +12,7 @@ Restart=always
 StandardOutput=file:/var/log/chisel/{{ chisel_config_name }}.log
 StandardError=file:/var/log/chisel/{{ chisel_config_name }}_error.log
 EnvironmentFile={{ chisel_config_destination }}
-ExecStart=/usr/local/bin/chisel server $HOST $PORT $KEY $AUTH_FILE $AUTH $KEEPALIVE $BACKEND $SOCK5 $TLS_KEY $TLS_CERT $TLS_DOMAIN $TLS_CA $PID $VERBOSE
+ExecStart=/usr/local/bin/chisel server $HOST $PORT $KEY $AUTH_FILE $AUTH $KEEPALIVE $BACKEND $REVERSE $SOCK5 $TLS_KEY $TLS_CERT $TLS_DOMAIN $TLS_CA $PID $VERBOSE
 
 [Install]
 WantedBy=multi-user.target
