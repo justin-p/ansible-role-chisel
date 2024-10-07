@@ -31,12 +31,12 @@ chisel_client_tls_cert:  /path/to/PEM
 
 chisel_server_host: 0.0.0.0
 chisel_server_port: 80
-chisel_server_key: a_random_string
-chisel_server_auth_file: /path/to/user.json
-chisel_server_auth: user:pass
+chisel_server_key: "" #a_random_string
+chisel_server_auth_file: "" #/path/to/user.json
+chisel_server_auth: "" #user:pass
 chisel_server_keepalive: 25s
 chisel_server_backend: http://127.0.0.1:8081
-chisel_server_tls_ca: /path/to/PEM
-chisel_server_tls_key: /path/to/PEM
-chisel_server_tls_cert: /path/to/PEM
+chisel_server_tls_ca: "" #/path/to/PEM
+chisel_server_tls_key: "" #/path/to/PEM
+chisel_server_tls_cert: "" #/path/to/PEM
 chisel_server_reverse: true
