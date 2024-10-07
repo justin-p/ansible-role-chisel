@@ -1,13 +1,28 @@
 # HOST=--host {{ chisel_server_host }}
 PORT=--port {{ chisel_server_port }}
-# KEY=--key {{ chisel_server_key }}
-# AUTH_FILE=--authfile {{ chisel_server_auth_file }}
-# AUTH=--auth {{ chisel_server_auth }}
+{% if chisel_server_reverse %}
+REVERSE=--reverse
+{% endif %}
+{% if chisel_server_key %}
+KEY=--key {{ chisel_server_key }}
+{% endif %}
+{% if chisel_server_auth_file %}
+AUTH_FILE=--authfile {{ chisel_server_auth_file }}
+{% endif %}
+{% if chisel_server_auth %}
+AUTH=--auth {{ chisel_server_auth }}
+{% endif %}
 # KEEPALIVE=--keepalive {{ chisel_server_keepalive }}
 # BACKEND=--backend {{ chisel_server_backend }}
 # SOCK5=--sock5
-# TLS_CA=--tls-ca {{ chisel_server_tls_ca }}
-# TLS_KEY=--tls-key {{ chisel_server_tls_key }}
-# TLS_CERT=--tls-cert {{ chisel_server_tls_cert }}
+{% if chisel_server_tls_ca %}
+TLS_CA=--tls-ca {{ chisel_server_tls_ca }}
+{% endif %}
+{% if chisel_server_tls_key %}
+TLS_KEY=--tls-key {{ chisel_server_tls_key }}
+{% endif %}
+{%if chisel_server_tls_cert %}
+TLS_CERT=--tls-cert {{ chisel_server_tls_cert }}
+{% endif %}
 # PID=--pid
 VERBOSE=-v
